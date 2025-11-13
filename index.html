@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Adtile Fixed Nav</title>
+    <meta name="author" content="Adtile">
+    
+    <!-- note: Adtile & responsive-nav CSS adapted for use in COMP 126 at UNC-Chapel Hill --> 
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <script src="js/responsive-nav.js"></script>
+  </head>
+  <body>
+    
+    <header>
+      <h1>A wonderful website</h1>
+      <nav class="nav-collapse">      
+            <ul>
+            <li class="menu-item"><a href="" data-scroll>Home</a></li>
+            <li class="menu-item"><a href="" data-scroll>About</a></li>
+            <li class="menu-item"><a href="" data-scroll>Contact</a></li>
+            </ul>
+      </nav>
+    </header>
+
+    <!-- <header>A wonderful website</header>
+    <nav class="nav-collapse">      
+            <ul>
+            <li class="menu-item"><a href="" data-scroll>home</a></li>
+            <li class="menu-item"><a href="" data-scroll>about</a></li>
+            <li class="menu-item"><a href="" data-scroll>contact</a></li>
+            </ul>
+      </nav> -->
+    
+    <section class="top-part">
+        <div class="welcome-area">
+            <div class="greeting">
+            <h2>Welcome.</h2>
+            <h3>We're glad you're here!</h3>
+            <button id="Learn-more">Learn More</button>
+            </div>
+
+            <div class="contact-container">
+                <form id="contact-form">
+                    <h4>Join our mailing list for updates!</h4>
+                    <div class="name-container-1">
+                      <label class="custom_label" label for="name">Name:</label></div>
+                    <div class="name-container-2">
+                      <input type="text" id="name" name="name" required />
+                    </div>
+
+                    <div class="email-container-1">
+                      <label class="custom_label" for="email">Email:</label></div>
+                    <div class="email-container-2">
+                      <input type="email" id="email" name="email" required />
+                    </div>
+
+                    <div class="submit-container">
+                      <button type="submit">Submit</button>
+                      <p id="form-message"></p>
+                    </div>
+                </form>
+        </div>
+        
+    </section>
+
+    <section>
+      <div class="images-area">
+        <img class="motivation-img" src="img/motivation.jpg" alt="Image of motivational quoute, you can do it.">
+        <img class="inspiration-img" src="img/inspiration.jpg" alt="Image of person jumping over large mountain.">
+        <img class="sign-img" src="img/sign.jpg" alt="Image of sign that says you got this.">
+      </div>
+    </section>
+    <footer>
+        <h4>© comp 126</h4>
+    </footer>
+    
+    <script src="js/fastclick.js"></script>
+    <script src="js/scroll.js"></script>
+    <script src="js/fixed-responsive-nav.js"></script>
+    <script>
+  const form = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwZoQhCQ58J-zBoTPn9aDz5FQUdibCanOOosXZ3YhNnCZQaneby-g3jRW3fGfbbnn7zTA/exec';
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    formMessage.textContent = 'Sending...';
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        formMessage.textContent = 'Message sent successfully!';
+        form.reset();
+        setTimeout(() => { formMessage.textContent = ''; }, 5000);
+      })
+      .catch(error => {
+        formMessage.textContent = 'Oops! Something went wrong.';
+        console.error('Error!', error.message);
+      });
+  });
+</script>
+  </body>
+</html>
